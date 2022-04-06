@@ -7,6 +7,8 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
   let record = new MyObject(block.block.header.hash.toString())
   //Record block number
   record.blockNumber = block.block.header.number.toNumber()
+
+  logger.info("block NUmber: " + record.blockNumber)
   await record.save()
 }
 
