@@ -8,7 +8,22 @@ export async function handleBlock(block: SubstrateBlock): Promise<void> {
   //Record block number
   record.blockNumber = block.block.header.number.toNumber()
 
-  logger.info("block NUmber: " + record.blockNumber)
+  logger.info(
+    "\nblock Number: " +
+      record.blockNumber +
+      "\nspecVersion: " +
+      block.specVersion +
+      "\ntimestamp: " +
+      block.timestamp +
+      "\nblock.header.parentHash: " +
+      block.block.header.parentHash +
+      "\nblock.header.stateRoot: " +
+      block.block.header.stateRoot +
+      "\nblock.header.extrinsicsRoot: " +
+      block.block.header.extrinsicsRoot +
+      "\nblock.header.digest: " +
+      block.block.header.digest
+  )
   await record.save()
 }
 
