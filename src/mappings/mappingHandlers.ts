@@ -33,6 +33,7 @@ export async function handleEvent(event: SubstrateEvent): Promise<void> {
       data: [account, balance],
     },
   } = event
+  //   let record = new MyObject(extrinsic.block.header.hash.toString())
   //Retrieve the record by its ID
   const record = await MyObject.get(event.block.block.header.hash.toString())
   record.account = account.toString()
@@ -42,10 +43,15 @@ export async function handleEvent(event: SubstrateEvent): Promise<void> {
 }
 
 export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
-  const record = await MyObject.get(extrinsic.block.block.header.hash.toString())
+  let record = new MyObject(extrinsic.block.block.header.hash.toString())
+  //   const record = await MyObject.get(extrinsic.block.block.header.hash.toString())
   //Date type timestamp
   record.timestamp = extrinsic.block.timestamp
   //Boolean tyep
   record.success = true
+  logger.info("\nblock number: " + extrinsic.block.block.header.number.toNumber())
+  logger.info("\nera: " + extrinsic.extrinsic.era)
+  logger.info("\nsigned: " + extrinsic.extrinsic.isSigned)
+  logger.info("\nsigner: " + extrinsic.extrinsic.signer)
   await record.save()
 }

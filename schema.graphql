@@ -1,6 +1,6 @@
 type myObject @entity {
   id: ID! #id is a required field
-  blockNumber: Int!
+  blockNumber: Int
   account: String #filed2 is an optional field
   value: BigInt @index
   timestamp: Date
